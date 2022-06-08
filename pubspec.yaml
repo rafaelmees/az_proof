@@ -1,0 +1,39 @@
+name: az_proof
+version: 1.0.0+1
+publish_to: none
+description: Teste de seleção da Azape
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  dio: ^4.0.6
+  shared_preferences: ^2.0.15
+  intl: ^0.17.0
+  flutter_svg: ^1.0.3
+  flutter_phosphor_icons: ^0.0.1+6
+  flutter_feather_icons: ^2.0.0+1
+  font_awesome_flutter: ^10.1.0
+  url_strategy: ^0.2.0
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/fonts/
+  fonts:
+    - family: Nunito Sans
+      fonts:
+        - asset: assets/fonts/NunitoSans-Bold.ttf
+        - asset: assets/fonts/NunitoSans-Regular.ttf
