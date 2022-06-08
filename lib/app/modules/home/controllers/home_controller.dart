@@ -6,8 +6,8 @@ class HomeController extends GetxController {
   final userName = ''.obs;
 
   @override
-  void onInit() {
-    getName();
+  void onInit() async {
+    await getName();
     super.onInit();
   }
 
@@ -19,7 +19,7 @@ class HomeController extends GetxController {
   @override
   void onClose() {}
 
-  void getName() async {
+  Future<void> getName() async {
     userName.value = await user.value.getName();
   }
 }

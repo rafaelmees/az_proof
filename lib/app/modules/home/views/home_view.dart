@@ -104,77 +104,24 @@ class HomeView extends GetView<HomeController> {
                               width: double.infinity,
                               padding: EdgeInsets.symmetric(vertical: 21),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(width: 26.0),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Termos de Uso',
-                                          style: TextStyle(
-                                            fontFamily: 'NunitoSans',
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
-                                            color: Color(0xff97A1A8),
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        ),
-                                        style: ButtonStyle(
-                                          overlayColor:
-                                              MaterialStateColor.resolveWith(
-                                                  (states) =>
-                                                      Colors.transparent),
-                                        ),
-                                      ),
-                                      SizedBox(width: 32.0),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Política de Privacidade',
-                                          style: TextStyle(
-                                            fontFamily: 'NunitoSans',
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
-                                            color: Color(0xFF97A1A8),
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        ),
-                                        style: ButtonStyle(
-                                          overlayColor:
-                                              MaterialStateColor.resolveWith(
-                                                  (states) =>
-                                                      Colors.transparent),
-                                        ),
-                                      )
-                                    ],
+                                  SvgPicture.asset(
+                                    'assets/images/logo_azape.svg',
+                                    width: 30,
+                                    height: 30,
                                   ),
-                                  SizedBox(height: 12),
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/images/logo_azape.svg',
-                                        width: 30,
-                                        height: 30,
-                                      ),
-                                      SizedBox(width: 16),
-                                      Text(
-                                        '® Desenvolvido por Azape',
-                                        style: TextStyle(
-                                          fontFamily: 'NunitoSans',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14,
-                                          color: Color(0xFF97A1A8),
-                                        ),
-                                      ),
-                                      SizedBox(width: 48),
-                                    ],
+                                  SizedBox(width: 16),
+                                  Text(
+                                    '® Desenvolvido por Azape',
+                                    style: TextStyle(
+                                      fontFamily: 'NunitoSans',
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0xFF97A1A8),
+                                    ),
                                   ),
+                                  SizedBox(width: 48),
                                 ],
                               ),
                             ),
@@ -222,13 +169,17 @@ class HomeView extends GetView<HomeController> {
                                       color: Color(0xff59666F),
                                     ),
                                   ),
-                                  Text(
-                                    controller.userName.value.split(' ').first,
-                                    style: TextStyle(
-                                      fontFamily: 'NunitoSans',
-                                      color: Color(0xff59666F),
-                                      fontSize: 19,
-                                      fontWeight: FontWeight.bold,
+                                  Obx(
+                                    () => Text(
+                                      controller.userName.value
+                                          .split(' ')
+                                          .first,
+                                      style: TextStyle(
+                                        fontFamily: 'NunitoSans',
+                                        color: Color(0xff59666F),
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ],
