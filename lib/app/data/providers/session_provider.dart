@@ -14,8 +14,6 @@ class SessionProvider {
     headers: {'Content-Type': 'application/json'},
   );
 
-  final id = '76f4e96c8fc8588e6';
-
   final baseUrl = 'http://150.230.64.79:9393/proof';
 
   final prefs = UserPreferences();
@@ -26,7 +24,7 @@ class SessionProvider {
   Future<bool> signInProvider(String email, String password) async {
     try {
       final response = await request.post(
-        '$baseUrl/session/$id',
+        '$baseUrl/session',
         data: jsonEncode(
           {
             "email": email,
