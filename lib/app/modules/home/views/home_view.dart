@@ -1,7 +1,12 @@
+import 'package:az_proof/app/modules/home/widgets/featured_cards.dart';
+import 'package:az_proof/shared/utils/currency_utils.dart';
+import 'package:az_proof/shared/utils/date_time_utils.dart';
+import 'package:az_proof/shared/utils/doc_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
@@ -94,9 +99,198 @@ class HomeView extends GetView<HomeController> {
                                 vertical: 25,
                                 horizontal: 40,
                               ),
-                              child: Container(
-                                  // O conteúdo do seu teste fica AQUI!
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Resumo da atividade',
+                                    style: Theme.of(context).textTheme.headline6,
                                   ),
+                                  SizedBox(height: 24.0),
+                                  Obx(
+                                    () => Row(
+                                      children: [
+                                        Expanded(
+                                          child: FeaturedCard(
+                                            icon: Icon(Icons.receipt_long_outlined),
+                                            iconColor: Color(0xFFE54594),
+                                            title: [
+                                              controller.dashboard.value.ordersCount,
+                                              Intl.plural(
+                                                controller.dashboard.value.ordersCount,
+                                                other: 'pedidos',
+                                                one: 'pedido',
+                                                zero: 'pedidos',
+                                              ),
+                                            ].join(' '),
+                                            subtitle: CurrencyUtils.formatCurrency(
+                                              value: controller.dashboard.value.ordersTotal,
+                                              locale: 'PT_BR',
+                                              symbol: 'R\$',
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: FeaturedCard(
+                                            icon: Icon(Icons.paid_outlined),
+                                            iconColor: Color(0xFF07C693),
+                                            title: [
+                                              controller.dashboard.value.salesCount,
+                                              Intl.plural(
+                                                controller.dashboard.value.ordersCount,
+                                                other: 'vendas',
+                                                one: 'venda',
+                                                zero: 'vendas',
+                                              ),
+                                            ].join(' '),
+                                            subtitle: CurrencyUtils.formatCurrency(
+                                              value: controller.dashboard.value.salesTotal,
+                                              locale: 'PT_BR',
+                                              symbol: 'R\$',
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: FeaturedCard(
+                                            icon: Icon(Icons.calculate_outlined),
+                                            iconColor: Color(0xFF3CB0D9),
+                                            title: 'Ticket médio',
+                                            subtitle: CurrencyUtils.formatCurrency(
+                                              value: controller.dashboard.value.averageTicket,
+                                              locale: 'PT_BR',
+                                              symbol: 'R\$',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 24.0),
+                                  Text(
+                                    'Pedidos',
+                                    style: Theme.of(context).textTheme.headline6,
+                                  ),
+                                  SizedBox(height: 24.0),
+                                  Card(
+                                    clipBehavior: Clip.antiAlias,
+                                    child: DataTableTheme(
+                                      data: DataTableThemeData(
+                                        headingRowColor: MaterialStateColor.resolveWith((states) {
+                                          return Color(0xFFFE7C6E);
+                                        }),
+                                        headingTextStyle: TextStyle(color: Colors.white),
+                                      ),
+                                      child: Container(
+                                        width: double.infinity,
+                                        child: Obx(
+                                          () => DataTable(
+                                            columns: [
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'ID do Pedido',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'ID na Loja',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'Criação',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'Nome do cliente',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'CPF/CNPJ do cliente',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'Status do pedido',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'Status do pagamento',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'Método de pagamento',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Flexible(
+                                                  child: Text(
+                                                    'Total',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                            rows: controller.dashboard.value.orders.map((order) => DataRow(
+                                              cells: [
+                                                DataCell(Text(order.id)),
+                                                DataCell(Text(order.sellerId)),
+                                                DataCell(Text(DateTimeUtils.formatDate(order.createdAt, 'dd/MM/yyyy'))),
+                                                DataCell(Text(order.customer.name)),
+                                                DataCell(Text(DocUtils.formatDoc(order.customer.doc))),
+                                                DataCell(Text(order.status.formatted)),
+                                                DataCell(Text(order.payment.status.formatted)),
+                                                DataCell(Text(order.payment.method.formatted)),
+                                                DataCell(Text(CurrencyUtils.formatCurrency(
+                                                  value: order.payment.amount,
+                                                  locale: 'PT_br',
+                                                  symbol: 'R\$',
+                                                ))),
+                                              ],
+                                            )).toList(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             Container(
                               color: Color(0xffF5F5F5),
