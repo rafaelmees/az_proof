@@ -1,7 +1,6 @@
 import 'package:az_proof/app/modules/home/widgets/featured_cards.dart';
+import 'package:az_proof/app/modules/home/widgets/orders_table.dart';
 import 'package:az_proof/shared/utils/currency_utils.dart';
-import 'package:az_proof/shared/utils/date_time_utils.dart';
-import 'package:az_proof/shared/utils/doc_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_svg/svg.dart';
@@ -171,123 +170,8 @@ class HomeView extends GetView<HomeController> {
                                     style: Theme.of(context).textTheme.headline6,
                                   ),
                                   SizedBox(height: 24.0),
-                                  Card(
-                                    clipBehavior: Clip.antiAlias,
-                                    child: DataTableTheme(
-                                      data: DataTableThemeData(
-                                        headingRowColor: MaterialStateColor.resolveWith((states) {
-                                          return Color(0xFFFE7C6E);
-                                        }),
-                                        headingTextStyle: TextStyle(color: Colors.white),
-                                      ),
-                                      child: Container(
-                                        width: double.infinity,
-                                        child: Obx(
-                                          () => DataTable(
-                                            columns: [
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'ID do Pedido',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'ID na Loja',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'Criação',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'Nome do cliente',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'CPF/CNPJ do cliente',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'Status do pedido',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'Status do pagamento',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'Método de pagamento',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Flexible(
-                                                  child: Text(
-                                                    'Total',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                            rows: controller.dashboard.value.orders.map((order) => DataRow(
-                                              cells: [
-                                                DataCell(Text(order.id)),
-                                                DataCell(Text(order.sellerId)),
-                                                DataCell(Text(DateTimeUtils.formatDate(order.createdAt, 'dd/MM/yyyy'))),
-                                                DataCell(Text(order.customer.name)),
-                                                DataCell(Text(DocUtils.formatDoc(order.customer.doc))),
-                                                DataCell(Text(order.status.formatted)),
-                                                DataCell(Text(order.payment.status.formatted)),
-                                                DataCell(Text(order.payment.method.formatted)),
-                                                DataCell(Text(CurrencyUtils.formatCurrency(
-                                                  value: order.payment.amount,
-                                                  locale: 'PT_br',
-                                                  symbol: 'R\$',
-                                                ))),
-                                              ],
-                                            )).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  Obx(
+                                    () => OrdersTable(orders: controller.dashboard.value.orders),
                                   ),
                                 ],
                               ),
